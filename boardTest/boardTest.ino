@@ -6,9 +6,7 @@
   const int SWGreen = 8;
   const int tone_pin = 11;
   const int sensor_pin = A0;
-  char sw_read_white =0;
-  char sw_read_green =0;
-  
+ 
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
 
@@ -24,13 +22,12 @@ void setup() {
 
 // the loop function runs over and over again forever
 void loop() {
-  sw_read_white=digitalRead(SWWhite);
-  sw_read_green=digitalRead(SWGreen);
-  if (sw_read_white == HIGH){
+ 
+  if (digitalRead(SWWhite) == HIGH){
     digitalWrite(LEDWhite, HIGH);  
     tone(tone_pin,1000,500);
   }
-  if (sw_read_green == HIGH)
+  if (digitalRead(SWGreen) == HIGH)
     digitalWrite(LEDRed, HIGH);  
   digitalWrite(LEDGreen, HIGH); 
   delay(1000);                    
