@@ -23,18 +23,17 @@
 
 // the loop function runs over and over again forever
 void loop() {
- 
+/* 
   for(int i =0; i <3 ;i++){
   digitalWrite(a[i], HIGH); 
   delay(1000);                   
   digitalWrite(a[i], LOW);
   delay(1000);
   }
-}  
-  /*if (digitalRead(SWWhite) == HIGH){
+}  */
+ if (digitalRead(SWWhite) == HIGH){
     digitalWrite(LEDWhite, HIGH);  
-   
-  }
+ }
   if (digitalRead(SWGreen) == HIGH)
     digitalWrite(LEDRed, HIGH);  
   digitalWrite(LEDGreen, HIGH); 
@@ -46,4 +45,3 @@ void loop() {
   Serial.println(sensorValue);
   delay(1000);                   
 }
-*/
