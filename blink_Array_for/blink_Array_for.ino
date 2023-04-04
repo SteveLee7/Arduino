@@ -7,6 +7,14 @@
   const int tone_pin = 11;
   const int sensor_pin = A0;
   int a[]={5,6,9};
+  int incomingByte;
+
+  void LedOnOff(){
+    digitalWrite(LEDWhite, HIGH);
+          delay(500);
+          digitalWrite(LEDWhite, LOW);
+          delay(500);
+  };
   
 ;void setup() {
   // initialize digital pin LED_BUILTIN as an output.
@@ -31,6 +39,35 @@ void loop() {
   delay(1000);
   }
 }  */
+if (Serial.available() > 0) {
+ 
+    Serial.print("I received: ");
+    Serial.println(incomingByte, HEX);
+    incomingByte = Serial.read();
+    /* 
+     if (incomingByte == 0x30)    digitalWrite(LEDWhite, LOW); 
+     if (incomingByte == 0x31)    digitalWrite(LEDWhite, HIGH);  
+     if (incomingByte == 0x32) {
+     digitalWrite(LEDWhite, HIGH);
+     delay(500);
+     digitalWrite(LEDWhite, LOW);
+     delay(500);
+     digitalWrite(LEDWhite, HIGH);
+     delay(500);
+     digitalWrite(LEDWhite, LOW);
+     */
+     switch (incomingByte & 0x0f){
+        case 1:
+          LedOnOff();
+          break;
+        case 2:
+          LedOnOff();
+          LedOnOff();
+          break;
+       }  
+     }
+  } 
+  /*
  if (digitalRead(SWWhite) == HIGH){
     digitalWrite(LEDWhite, HIGH);  
  }
@@ -44,4 +81,4 @@ void loop() {
   int sensorValue = analogRead(A0);
   Serial.println(sensorValue);
   delay(1000);                   
-}
+} */
