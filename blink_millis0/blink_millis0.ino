@@ -9,7 +9,7 @@ int t_button_high = 0;
 char button_high_flag =0;
 void setup() {
   // put your setup code here, to run once:
-
+Serial.begin(115200);
 }
 void loop() {
 unsigned long t_now = millis();
@@ -17,28 +17,23 @@ unsigned long t_now = millis();
 int buttonInput=digitalRead(buttonPin);
 if(button_high_flag = 0) {
   if(buttonInput==HIGH){
-    if(t_now- t_button_prev >= t_button_delay){ 
-      t_button_prev = t_now;
-      t_button_high++;
-      if(t_button_high>255){
-         t_button_high = 0; 
-         button_high_flag = 1;
+      if(button_high_flag == 1)
+        if(t_now- t_prev >= t_delay){
+        t_prev = t_now;
+         t_high++;
+        if(t_high>255)  t_high = 0;
+        t_button_high ++;   
+      if (t_button_high>255) {
+        t_button_high = 0; 
+        button_high_flag = 1;
+        } 
+       analogWrite(LED, t_high); 
+       Serial.println(t_high) ;
       }
-   if(t_now- t_prev >= t_delay){
-      t_prev = t_now;
-      t_high++;
-
-      if(t_high>255) {
-        t_high = 0;
-        button_high_flag = 0;
-      }
-      analogWrite(LED, t_high);  
-      }
-    }
   else {
     analogWrite(LED, 0);
     button_high_flag = 0;
-      }
-    }   
-  }
-}  
+      }   
+    }
+  }  
+}
