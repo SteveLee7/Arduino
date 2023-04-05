@@ -44,18 +44,6 @@ if (Serial.available() > 0) {
     Serial.print("I received: ");
     Serial.println(incomingByte, HEX);
     incomingByte = Serial.read();
-    /* 
-     if (incomingByte == 0x30)    digitalWrite(LEDWhite, LOW); 
-     if (incomingByte == 0x31)    digitalWrite(LEDWhite, HIGH);  
-     if (incomingByte == 0x32) {
-     digitalWrite(LEDWhite, HIGH);
-     delay(500);
-     digitalWrite(LEDWhite, LOW);
-     delay(500);
-     digitalWrite(LEDWhite, HIGH);
-     delay(500);
-     digitalWrite(LEDWhite, LOW);
-     */
      switch (incomingByte & 0x0f){
         case 1:
           LedOnOff();
