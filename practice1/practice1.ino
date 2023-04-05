@@ -1,3 +1,5 @@
+#define switchOn HIGH
+#define switchOff LOW
 const int whiteLED = 9;
 const int LEDWhite = 9;
   const int LEDRed = 6;
@@ -6,15 +8,19 @@ const int count = 10;
   const int SWWhite = 7;
   const int SWGreen = 8;
    const int sensor_pin = A0;
+int blinkEsc_flag = 0;   
 void blink1()
 {
-  if(analogRead(sensor_pin) > 100){
-  digitalWrite(whiteLED, HIGH);
-  delay(500);
-  digitalWrite(whiteLED, LOW);
-  delay(500);
-   Serial.println(analogRead(sensor_pin));
-  }
+  if(digitalRead(SWWhite)== switchOff)
+  {
+    if(analogRead(sensor_pin) > 100){
+      digitalWrite(whiteLED, HIGH);
+      delay(500);
+      digitalWrite(whiteLED, LOW);
+      delay(500);
+      Serial.println(analogRead(sensor_pin));
+    }
+  }  
 };
 void blink2(int count){
 while( count > 0 ){
@@ -54,8 +60,12 @@ void setup() {
 }
 
 void loop() {
-  blink1();
-   Serial.println(analogRead(sensor_pin));
+  if(digitalRead(SWGreen)== switchOn)  blinkEsc_flag=0; 
+  if(digitalRead(SWWhite)== switchOn)  blinkEsc_flag=1; 
+    if (blinkEsc_flag == 0){
+      blink1();
+      Serial.println(analogRead(sensor_pin));
+    }
  //int count= blink3(1000);
 
    delay(500);
