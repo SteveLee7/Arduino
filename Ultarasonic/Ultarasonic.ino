@@ -1,5 +1,4 @@
 
-
 // 20230404 Board Hardware's Function Test
   const int LEDWhite = 9;
   const int LEDRed = 6;
@@ -38,8 +37,6 @@
   pinMode(tone_pin,OUTPUT);
   Serial.begin(115200);
 }
-
-
 void loop() {
 
 if (Serial.available() > 0) {
