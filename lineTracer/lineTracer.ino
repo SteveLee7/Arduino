@@ -18,7 +18,7 @@ void setup() {
   pinMode(IR_L, INPUT);
   pinMode(IR_M, INPUT);
   pinMode(IR_R, INPUT);
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.print("Start");
 }
 
@@ -28,13 +28,13 @@ void loop() {
   IR_L_data = digitalRead(IR_L);
   IR_M_data = digitalRead(IR_M);
   IR_R_data = digitalRead(IR_R);
-  /*
+  
   Serial.print(IR_L_data);
   Serial.print("-");
   Serial.print(IR_M_data);
   Serial.print("-");
   Serial.println(IR_R_data);
-  */
+ /* 
   // [실습] 빈칸 채우기
   // 아래 라인 트레이서 코드가 있어요. (0이 흰색, 1이 검은색)
   // 자동차가 가야할 방향을 "  " 안에 적어주세요 (직진/정지/좌회전/우회전)
