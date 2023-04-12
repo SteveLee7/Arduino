@@ -43,30 +43,27 @@ void loop() {
     Serial.println("forward");
     forward();
   }
-  else if ((IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 0)||(IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 1)) {
-    Serial.println("forward");
-    forward();
- }
-  else if (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 0)  {
+   else if (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 0)  {
     Serial.println("Left");
     left();
   }
-  else if  ((IR_L_data == 0 and IR_M_data == 0 and IR_R_data == 1) ) {
+  else if  (IR_L_data == 0 and IR_M_data == 0 and IR_R_data == 1) {
     Serial.println("Right");
     right();
   }
-  /*
-  else if (IR_L_data == 0  and IR_R_data == 0) {
-    Serial.println("Backward  ");
-    backward();
-  }
-  */
-  else if (IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 1) {
-    Serial.println("stop  ");
+   else if (IR_L_data == 1  and IR_R_data == 1) {
+    Serial.println("정지");
     stop();
   }
-}
-
+  /*  
+  else if ((IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 1) || (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 1)||
+           (IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 0) || (IR_L_data == 0 and IR_M_data == 0 and IR_R_data == 0)||
+           (IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 1)) { 
+     Serial.println("stop");
+     stop();
+  }
+ */ 
+}  
 
 void right () {
   //우
