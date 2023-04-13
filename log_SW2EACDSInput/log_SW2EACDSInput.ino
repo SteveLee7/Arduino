@@ -18,7 +18,10 @@ void loop() {
      Serial.println("테스트 끝");
          logging = 0;
   }    
-   delay(1000);
-  if (logging) Serial.println(analogRead(CDS));   
-  
+ 
+  if (logging) {   
+      for (int i=0; i < 10;i++) Serial.println(analogRead(CDS));
+      logging=0;
+  }
+  delay(100);
  }
