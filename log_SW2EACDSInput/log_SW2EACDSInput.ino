@@ -20,4 +20,5 @@ void loop() {
   }    
    delay(1000);
   if (logging) Serial.println(analogRead(CDS));   
+  
  }
