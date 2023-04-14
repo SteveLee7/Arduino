@@ -30,6 +30,7 @@ void loop() {
   IR_M_data = digitalRead(IR_M);
   IR_R_data = digitalRead(IR_R);
   
+
   Serial.print(IR_L_data);
   Serial.print("-");
   Serial.print(IR_M_data);
@@ -44,7 +45,7 @@ void loop() {
     Serial.println("forward");
     forward();
   }
-   else if (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 0)  {
+   else if (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 0) {
     Serial.println("Left");
     left();
   }
