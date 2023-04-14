@@ -1,61 +1,85 @@
-
-// 20230404 Board Hardware's Function Test
-  const int LEDWhite = 9;
-  const int LEDRed = 6;
-  const int LEDGreen = 5;
-  const int SWWhite = 7;
-  const int SWGreen = 8;
-  const int tone_pin = 11;
-  const int sensor_pin = A0;
-  int a[]={5,6,9};
-  int led_buzzer_sel;
-  int time_how_long;
-  
-  unsigned long prevMillis=0;
+#include <Servo.h>
 
 
-  void LedOnOff(int interval){
-    for (;millis() - prevMillis >= interval;) {
-        digitalWrite(LEDWhite, HIGH);
-        delay(interval);
-        digitalWrite(LEDWhite, LOW);
-        delay(500);
-        prevMillis=millis();
-    }   
-        return 0;
-  };
-  
-;void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
 
-  //pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(LEDWhite,OUTPUT);
+ #define A_tone 440
+ #define B_tone 493
+ #define C_tone 523
+ #define D_tone 587
+ #define E_tone 659
+ #define F_tone 698
+ #define G_tone 783
+
+Servo myservo;
+
+const int LEDRed = 6;
+const int trigPin = 9;
+const int echoPin = 10;
+const int tone_pin = 4;
+float duration, distance;
+ const int SWWhite = 7;
+int pos = 0;
+
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
   pinMode(LEDRed,OUTPUT);
-  pinMode(LEDGreen,OUTPUT);
-  pinMode(SWWhite,INPUT);
-  pinMode(SWGreen,INPUT);
   pinMode(tone_pin,OUTPUT);
-  Serial.begin(115200);
+  pinMode(SWWhite,INPUT);
+  Serial.begin(9600);
+  myservo.attach(11);
 }
-void loop() {
+void ultrasonicMesur(){  
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration*.0343)/2;
+  return 0;
+};
+void  UltrasonicProc(){
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println("cm");
+  if (distance < 30){
+  switch ((int)distance) {
+      case 0 ... 5:
+        digitalWrite(LEDRed,HIGH);
+        tone(tone_pin,C_tone,100);
+      break;
+      case 6 ... 10:  
+        digitalWrite(LEDRed,HIGH);
+        tone(tone_pin,D_tone,200);
+      break;
+      case 11 ... 15:  
+        digitalWrite(LEDRed,HIGH);
+        tone(tone_pin,E_tone,300);
+      break;
+      case 16 ... 20:  
+        digitalWrite(LEDRed,HIGH);
+        tone(tone_pin,F_tone,400);
+      case 21 ... 30:  
+        digitalWrite(LEDRed,HIGH);
+        tone(tone_pin,G_tone,500);  
+        break;  
+      default:
+      digitalWrite(LEDRed,LOW);
+      break;
+      }
+  }
+  return  0 ;  
+}  
 
-if (Serial.available() > 0) {
-    Serial.print("White LED:1, Buzzer:2 ? ");
-    led_buzzer_sel=Serial.read();
-    Serial.println(led_buzzer_sel, HEX);
-    }
-    if (Serial.available() > 0) {
-    Serial.print("How Long Time:3 ? ");
-    time_how_long=Serial.read();
-    Serial.println(time_how_long, HEX);
-    }
-      switch (led_buzzer_sel & 0x0f){
-        case 1:
-          LedOnOff(time_how_long);
-          break;
-        case 2:
-          tone(tone_pin,1000,time_how_long);
-          break;
-       }  
-     
-  } 
+void loop() {
+  
+  if (digitalRead(SWWhite)== HIGH) {
+    ultrasonicMesur();
+    UltrasonicProc();
+    int angle = map((int)distance,0,30,0,180);
+    myservo.write(angle);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+  }
+  delay(100);
+}
