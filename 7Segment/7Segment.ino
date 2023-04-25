@@ -100,7 +100,7 @@ void loop() {
   digitalWrite(pinF, LOW);   
   digitalWrite(pinG,  HIGH);     
   delay(1);               // wait for a second
-/*  
+
   //4
   digitalWrite(pinA, HIGH);   
   digitalWrite(pinB, LOW);   
@@ -160,5 +160,5 @@ void loop() {
   digitalWrite(pinF, LOW);   
   digitalWrite(pinG, LOW);     
   delay(1000);               // wait for a second
-  */
+ 
 }
