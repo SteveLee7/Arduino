@@ -3,13 +3,18 @@ const int motor_A1 = 5;
 const int motor_A2 = 6;
 const int motor_B1 = 9;
 const int motor_B2 = 10;
-const int IR_R = A1;
-const int IR_M = A3;
-const int IR_L = A5;
+const int IR_R = A0;
+const int IR_M = A2;
+const int IR_L = A4;
+
+const int IR_L_R = 3;
+const int IR_R_R = 12;
 int IR_L_data;
 int IR_M_data;
 int IR_R_data;
 
+int IR_L_R_data;
+int IR_R_R_data;
 
 void setup() {
   pinMode(motor_A1, OUTPUT);
@@ -19,7 +24,9 @@ void setup() {
   pinMode(IR_L, INPUT);
   pinMode(IR_M, INPUT);
   pinMode(IR_R, INPUT);
-  Serial.begin(115200);
+  pinMode(IR_L_R, INPUT);
+  pinMode(IR_R_R, INPUT);
+  Serial.begin(9600);
   Serial.print("Start");
 }
 
@@ -57,14 +64,13 @@ void loop() {
     Serial.println("정지");
     stop();
   }
-  /*  
+  
   else if ((IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 1) || (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 1)||
            (IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 0) || (IR_L_data == 0 and IR_M_data == 0 and IR_R_data == 0)||
            (IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 1)) { 
      Serial.println("stop");
      stop();
-  }
-*/ 
+  } 
 }  
 
 void right () {
