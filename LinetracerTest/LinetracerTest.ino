@@ -1,5 +1,5 @@
-
-const int motor_A1 = 5;
+#define wheelTime 1     //milliscondes
+const int motor_A1 = 5; 
 const int motor_A2 = 6;
 const int motor_B1 = 9;
 const int motor_B2 = 10;
@@ -16,7 +16,7 @@ int IR_R_data;
 
 int IR_R_R_data;
 int IR_L_R_data;
-
+int preIR_L_R_data = 0;
 
 void setup() {
   pinMode(motor_A1, OUTPUT);
@@ -53,16 +53,94 @@ void loop() {
     stop();
     delay(1000);
    
-     for(int i=0;i < 500 ;) {
+    for(int i=0;i <= 35;) {          //1pole(360degree) -> 4pole(90degree) ->12pole(45degree) * 3rotation = 36
          IR_L_R_data = digitalRead(IR_L_R);
-         if(IR_L_R_data==0) i++;
-         delay(5);
+         if(IR_L_R_data==0){
+           if(preIR_L_R_data==1) {
+            i++;
+            preIR_L_R_data = 0;
+           }
+         }
+         else preIR_L_R_data = 1;
+         delay(wheelTime);
          forward();
          Serial.println(i);
     }
-   
-  
-  while(1){ stop();}
+     preIR_L_R_data = 0;
+    stop();
+    delay(1000);
+    right();                        //270degree roation
+    for(int i=0;i <= 11;) {
+         IR_L_R_data = digitalRead(IR_L_R);
+         if(IR_L_R_data==0){
+           if(preIR_L_R_data==1) {
+            i++;
+            preIR_L_R_data = 0;
+           }
+         }
+         else preIR_L_R_data = 1;
+         delay(wheelTime);
+
+         Serial.println(i);
+    }
+  //  left();
+  //  delay(400);
+    preIR_L_R_data = 0;  
+    stop();
+    delay(1000);
+    forward();
+    for(int i=0;i <= 35;) {
+         IR_L_R_data = digitalRead(IR_L_R);
+         if(IR_L_R_data==0){
+           if(preIR_L_R_data==1) {
+            i++;
+            preIR_L_R_data = 0;
+           }
+         }
+         else preIR_L_R_data = 1;
+         delay(wheelTime);
+
+         Serial.println(i);
+    }
+    stop();
+     preIR_L_R_data = 0;
+    
+    delay(1000);
+    right();                        //270degree roation ->  return
+    for(int i=0;i <= 11;) {
+         IR_L_R_data = digitalRead(IR_L_R);
+         if(IR_L_R_data==0){
+           if(preIR_L_R_data==1) {
+            i++;
+            preIR_L_R_data = 0;
+           }
+         }
+         else preIR_L_R_data = 1;
+         delay(wheelTime);
+
+         Serial.println(i);
+    }
+    preIR_L_R_data = 0;  
+    stop();
+    delay(1000);
+    forward();
+    for(int i=0;i <= 35;) {
+         IR_L_R_data = digitalRead(IR_L_R);
+         if(IR_L_R_data==0){
+           if(preIR_L_R_data==1) {
+            i++;
+            preIR_L_R_data = 0;
+           }
+         }
+         else preIR_L_R_data = 1;
+         delay(wheelTime);
+
+         Serial.println(i);
+    }
+    stop();
+     preIR_L_R_data = 0;
+    
+  while(1){}
 }
   /*
   //IR 센서 값을 읽어 출력해주는 코드
