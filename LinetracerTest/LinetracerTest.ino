@@ -53,7 +53,7 @@ void loop() {
     stop();
     delay(1000);
    
-    for(int i=0;i <= 35;) {          //1pole(360degree) -> 4pole(90degree) ->12pole(45degree) * 3rotation = 36
+    for(int i=0;i <= 23;) {          //1pole(360degree) -> 4pole(90degree) ->8pole(45degree) * 3rotation = 24
          IR_L_R_data = digitalRead(IR_L_R);
          if(IR_L_R_data==0){
            if(preIR_L_R_data==1) {
@@ -70,7 +70,7 @@ void loop() {
     stop();
     delay(1000);
     right();                        //270degree roation
-    for(int i=0;i <= 11;) {
+    for(int i=0;i <= 7;) {          // 11 -> 315 degree rotation 7
          IR_L_R_data = digitalRead(IR_L_R);
          if(IR_L_R_data==0){
            if(preIR_L_R_data==1) {
@@ -89,7 +89,7 @@ void loop() {
     stop();
     delay(1000);
     forward();
-    for(int i=0;i <= 35;) {
+    for(int i=0;i <= 23;) {
          IR_L_R_data = digitalRead(IR_L_R);
          if(IR_L_R_data==0){
            if(preIR_L_R_data==1) {
@@ -107,7 +107,7 @@ void loop() {
     
     delay(1000);
     right();                        //270degree roation ->  return
-    for(int i=0;i <= 11;) {
+    for(int i=0;i <= 7;) {
          IR_L_R_data = digitalRead(IR_L_R);
          if(IR_L_R_data==0){
            if(preIR_L_R_data==1) {
@@ -124,7 +124,7 @@ void loop() {
     stop();
     delay(1000);
     forward();
-    for(int i=0;i <= 35;) {
+    for(int i=0;i <= 23;) {
          IR_L_R_data = digitalRead(IR_L_R);
          if(IR_L_R_data==0){
            if(preIR_L_R_data==1) {
