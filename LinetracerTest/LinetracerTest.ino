@@ -1,6 +1,6 @@
-#define wheelTime 1     //delay time wheel pole in count(milliseconds/unit)
+#define wheelTime 3     //delay time wheel pole in count(milliseconds/unit)
 #define wheelPole 8     //pole number per wheel
-#define rotationCnt 3
+#define rotationCnt 2
 
 const int motor_A1 = 5; 
 const int motor_A2 = 6;
@@ -56,8 +56,9 @@ void wheelAlignment(){
     stop();
     delay(1000);
 }
-void rightTurn() {                        
-    for(int i=0;i <=  (wheelPole -1);) {
+void rightTurn() {
+    right();                        
+    for(int i=0;i <=  wheelPole;) {
          IR_L_R_data = digitalRead(IR_L_R);
          if(IR_L_R_data==0){
            if(preIR_L_R_data==1) {
@@ -69,11 +70,11 @@ void rightTurn() {
          delay(wheelTime);
          Serial.println(i);
     }
-}    
-void forwardPeriode(){    
-    preIR_L_R_data = 0;  
+    preIR_L_R_data = 0;
     stop();
     delay(1000);
+}    
+void forwardPeriode(){    
     forward();
     for(int i=0;i <= (wheelPole * rotationCnt-1);) {
          IR_L_R_data = digitalRead(IR_L_R);
@@ -88,7 +89,8 @@ void forwardPeriode(){
          Serial.println(i);
     }
     stop();
-     preIR_L_R_data = 0;
+    preIR_L_R_data = 0;
+    delay(1000);
 }
 
 int lineTracer(){
@@ -130,10 +132,11 @@ int lineTracer(){
     Serial.println("정지");
     stop();
     escapeCnt++;
-    if(escapeCnt >=50) {
+    if(escapeCnt >=100) {
     return 1;
     escapeCnt = 0;
     }
+    else escapeCnt++;
   } 
   return 0;
 } 
@@ -196,7 +199,7 @@ void stop() {
 // 1pole(360degree) -> 4pole(90degree) ->8pole(45degree) * 3rotation = 24  
 // forwarding during 3 rotations of wheels and stop
 void avoidThru(){
-// right turn 270degrees roation and stop
+// right turn 270 degrees roation and stop
     rightTurn();
 // forwarding during 3 rotations of wheels and stop
     forwardPeriode();
@@ -209,12 +212,14 @@ void avoidThru(){
 void loop() { 
   char j=0;
   stop();
-//  wheelAlignment();
-//  while(1){
-//     if(j=lineTracer()) {
+  wheelAlignment();
+  while(1){
+     if(j=lineTracer()) {
         avoidThru();
-        while(1){}
-     }
+//        while(1){}
+      }
+  }  
+}  
   /*
      Serial.println(j);
      delay(100);
