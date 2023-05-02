@@ -1,3 +1,4 @@
+
 #define wheelTime 3     //delay time wheel pole in count(milliseconds/unit)
 #define wheelPole 8     //pole number per wheel
 #define rotationCnt 2
@@ -71,6 +72,7 @@ void rightTurn() {
          Serial.println(i);
     }
     preIR_L_R_data = 0;
+
     stop();
     delay(1000);
 }    
