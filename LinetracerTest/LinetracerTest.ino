@@ -142,6 +142,7 @@ int lineTracer(){
   } 
   return 0;
 } 
+
 /*
   else if ((IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 1) || (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 1)||
            (IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 0) || (IR_L_data == 0 and IR_M_data == 0 and IR_R_data == 0)||
