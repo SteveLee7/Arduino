@@ -151,6 +151,7 @@ int lineTracer(){
      stop();
     } 
 */
+
 void rightInit () {
   //우
   analogWrite(motor_A1, 180);
