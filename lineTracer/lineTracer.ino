@@ -30,7 +30,6 @@ void setup() {
   Serial.print("Start");
 }
 
-
 void loop() {
   //IR 센서 값을 읽어 출력해주는 코드
   IR_L_data = digitalRead(IR_L);
